@@ -30,7 +30,7 @@ app.use(function (req, res, next) {
 // 3. Database Connection --------------------------------
 mongoose
   .connect(
-    "mongodb://16d1c4790df1fbf93da272bc28c6f8c9:sunbug62@10a.mongo.evennode.com:27017/16d1c4790df1fbf93da272bc28c6f8c9",
+    "mongodb://b82304bfb2041cbaaf1bbd792a033c29:sunbug62@12a.mongo.evennode.com:27018/b82304bfb2041cbaaf1bbd792a033c29",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -46,43 +46,43 @@ mongoose
   });
 
 // 4. Models ---------------------------------------------
-let Car = require("./models/Car.js");
-let User = require("./models/User.js");
-let Review = require("./models/Review.js");
+let Destination = require("./models/Destination.js");
 let Enquiry = require("./models/Enquiry.js");
+let Review = require("./models/Review.js");
+let User = require("./models/User.js");
 
 // 5. Routes ---------------------------------------------
 
 // Cars -----------------------------------
 // cars - GET - get all Cars
-app.get("/api/cars", (req, res) => {
+app.get("/api/destinations", (req, res) => {
   if (req.query.ids) {
     let idsArray = req.query.ids.split(",");
     console.log(idsArray);
-    Car.find({
+    Destination.find({
       _id: {
         $in: idsArray
       }
     })
-      .then((cars) => {
-        if (!cars) {
-          res.status(400).send({ msg: "No Cars found" });
+      .then((destinations) => {
+        if (!destinations) {
+          res.status(400).send({ msg: "No Destinations found" });
         } else {
-          res.json(cars);
+          res.json(destinations);
         }
       })
       .catch((err) => {
         console.log(err);
         res.status(500).send({
-          msg: "this one",
+          msg: "No destinations found",
           error: err.message
         });
       });
-  } else if (req.query.brand) {
+  } /*else if (req.query.brand) {
     Car.find({ brand: req.query.brand })
       .then((cars) => {
         if (!cars) {
-          res.status(400).send({ msg: "No Cars found" });
+          res.status(400).send({ msg: "No destinations found" });
         } else {
           res.json(cars);
         }
@@ -94,19 +94,19 @@ app.get("/api/cars", (req, res) => {
           error: err.message
         });
       });
-  } else {
-    Car.find({})
-      .then((cars) => {
-        if (!cars) {
-          res.status(400).send({ msg: "No Cars found" });
+  }*/ else {
+    Destination.find({})
+      .then((destinations) => {
+        if (!destinations) {
+          res.status(400).send({ msg: "No destinations found" });
         } else {
-          res.json(cars);
+          res.json(destinations);
         }
       })
       .catch((err) => {
         console.log(err);
         res.status(500).send({
-          msg: "Problem finding cars",
+          msg: "Problem finding destinations",
           error: err.message
         });
       });
@@ -114,19 +114,20 @@ app.get("/api/cars", (req, res) => {
 });
 
 // Cars - GET - get single by id
-app.get("/api/cars/:id", (req, res) => {
-  Car.findById(req.params.id)
-    .then((car) => {
-      if (!car) {
-        res.status(404).send("Car not found");
+app.get("/api/destinations/:id", (req, res) => {
+  Destination.findById(req.params.id)
+    .then((destination) => {
+      if (!destination) {
+        res.status(404).send("Destination not found");
       } else {
-        res.json(car);
+        console.log("retrieved single destination");
+        res.json(destination);
       }
     })
     .catch((err) => {
       console.log(err);
       res.send({
-        msg: "Problem getting Car",
+        msg: "Problem getting destination",
         error: err.message
       });
     });
@@ -139,9 +140,9 @@ app.put("/api/cars/:id", (req, res) => {
     return res.status(400).send("Problem booking car - bad request");
   } else {
     // update car
-    Car.findByIdAndUpdate(req.params.id, req.body, { new: true })
-      .then((car) => {
-        res.json(car);
+    Destination.findByIdAndUpdate(req.params.id, req.body, { new: true })
+      .then((destination) => {
+        res.json(destination);
       })
       .catch((err) => {
         console.log(err);
