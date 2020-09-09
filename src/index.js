@@ -139,7 +139,7 @@ app.get("/api/destinations/:id", (req, res) => {
 
 app.get("/api/resorts", (req, res) => {
   if (req.query.destinationId) {
-    //console.log("query");
+    console.log(req.query.destinationId);
     Resort.find({ destinationId: req.query.destinationId })
       .then((resorts) => {
         if (!resorts) {
