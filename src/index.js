@@ -50,12 +50,12 @@ let Destination = require("./models/Destination.js");
 let Enquiry = require("./models/Enquiry.js");
 let Review = require("./models/Review.js");
 let User = require("./models/User.js");
-//let Resort = require("./models/Resort.js");
+let Resort = require("./models/Resort.js");
 
 // 5. Routes ---------------------------------------------
 
-// Cars -----------------------------------
-// cars - GET - get all Cars
+// Destinations -----------------------------------
+// destinations - GET - if ids query: get ids, else get all destinations
 app.get("/api/destinations", (req, res) => {
   if (req.query.ids) {
     let idsArray = req.query.ids.split(",");
@@ -114,7 +114,7 @@ app.get("/api/destinations", (req, res) => {
   }
 });
 
-// Cars - GET - get single by id
+// Destinations - GET - get single by id
 app.get("/api/destinations/:id", (req, res) => {
   Destination.findById(req.params.id)
     .then((destination) => {
@@ -132,6 +132,45 @@ app.get("/api/destinations/:id", (req, res) => {
         error: err.message
       });
     });
+});
+
+// Resorts -----------------------------
+// resorts - GET - if query destinationId: get ids, esle get all resorts
+
+app.get("/api/resorts", (req, res) => {
+  if (req.query.destinationId) {
+    //console.log("query");
+    Resort.find({ destinationId: req.query.destinationId })
+      .then((resorts) => {
+        if (!resorts) {
+          res.status(400).send({ msg: "no resorts found" });
+        } else {
+          console.log(resorts);
+          res.json(resorts);
+        }
+      })
+      .catch((err) => {
+        res.send({
+          msg: "problem getting resorts",
+          error: err.message
+        });
+      });
+  } else {
+    Resort.find({})
+      .then((resorts) => {
+        if (!resorts) {
+          res.status(400).send({ msg: "no resorts found" });
+        } else {
+          res.json(resorts);
+        }
+      })
+      .catch((err) => {
+        res.send({
+          msg: "problem getting resorts",
+          error: err.message
+        });
+      });
+  }
 });
 
 // Reviews - PUT - update a single car
