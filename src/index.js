@@ -50,6 +50,7 @@ let Destination = require("./models/Destination.js");
 let Enquiry = require("./models/Enquiry.js");
 let Review = require("./models/Review.js");
 let User = require("./models/User.js");
+//let Resort = require("./models/Resort.js");
 
 // 5. Routes ---------------------------------------------
 
