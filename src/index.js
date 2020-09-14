@@ -173,6 +173,24 @@ app.get("/api/resorts", (req, res) => {
   }
 });
 
+// Resorts - GET - get resort by single ID
+app.get("/api/resorts/:id", (req, res) => {
+  Resort.findById(req.params.id)
+    .then((resort) => {
+      if (!resort) {
+        res.status(404).send({ msg: "no resort found" });
+      } else {
+        res.json(resort);
+      }
+    })
+    .catch((err) => {
+      res.send({
+        msg: "problem gettinf resort",
+        error: err.message
+      });
+    });
+});
+
 // Reviews - PUT - update a single car
 app.put("/api/cars/:id", (req, res) => {
   // validate request
