@@ -263,6 +263,7 @@ app.post("/api/users", (req, res) => {
       .save()
       .then((user) => {
         res.status(201).json(user);
+        console.log(user);
       })
       .catch((err) => {
         console.log(err);
