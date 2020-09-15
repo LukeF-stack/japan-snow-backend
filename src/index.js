@@ -433,8 +433,7 @@ app.post("/api/auth/login", (req, res) => {
         let token = jwt.sign(
           {
             _id: user._id,
-            first_name: user.first_name,
-            last_name: user.last_name,
+            fullName: user.fullName,
             email: user.email
           },
           secretSalt,
