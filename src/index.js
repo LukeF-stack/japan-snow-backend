@@ -441,10 +441,11 @@ app.post("/api/auth/login", (req, res) => {
         );
         user.password = undefined;
 
-        res.json({
+        res.status(200).json({
           token: token,
           user: user
         });
+        console.log(user);
       } else {
         res.status(400).json({
           message: "Email / password is incorrect"
