@@ -434,7 +434,8 @@ app.post("/api/auth/login", (req, res) => {
           {
             _id: user._id,
             fullName: user.fullName,
-            email: user.email
+            email: user.email,
+            favs: user.favs
           },
           secretSalt,
           { expiresIn: 60 * 60 }
