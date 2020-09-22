@@ -80,23 +80,7 @@ app.get("/api/destinations", (req, res) => {
           error: err.message
         });
       });
-  } /*else if (req.query.brand) {
-    Car.find({ brand: req.query.brand })
-      .then((cars) => {
-        if (!cars) {
-          res.status(400).send({ msg: "No destinations found" });
-        } else {
-          res.json(cars);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).send({
-          msg: "Problem finding cars",
-          error: err.message
-        });
-      });
-}*/ /* else {
+  } /* else {
     Destination.find({})
       .then((destinations) => {
         if (!destinations) {
@@ -109,6 +93,24 @@ app.get("/api/destinations", (req, res) => {
         console.log(err);
         res.status(500).send({
           msg: "Problem finding destinations",
+          error: err.message
+        });
+      });
+}*/
+
+  /*else if (req.query.brand) {
+    Car.find({ brand: req.query.brand })
+      .then((cars) => {
+        if (!cars) {
+          res.status(400).send({ msg: "No destinations found" });
+        } else {
+          res.json(cars);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).send({
+          msg: "Problem finding cars",
           error: err.message
         });
       });
