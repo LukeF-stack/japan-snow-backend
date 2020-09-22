@@ -70,6 +70,7 @@ app.get("/api/destinations", (req, res) => {
           res.status(400).send({ msg: "No Destinations found" });
         } else {
           res.json(destinations);
+          console.log("destinations: ", destinations);
         }
       })
       .catch((err) => {
@@ -435,7 +436,7 @@ app.post("/api/auth/login", (req, res) => {
             _id: user._id,
             fullName: user.fullName,
             email: user.email,
-            favs: user.favs
+            favs_destinations: user.favs_destinations
           },
           secretSalt,
           { expiresIn: 60 * 60 }

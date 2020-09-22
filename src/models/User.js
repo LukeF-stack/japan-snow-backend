@@ -6,7 +6,7 @@ const UserSchema = new Schema(
     fullName: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    favs: { type: Array }
+    favs_destinations: { type: Array }
   },
   {
     versionKey: false
