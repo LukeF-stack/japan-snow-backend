@@ -96,7 +96,7 @@ app.get("/api/destinations", (req, res) => {
           error: err.message
         });
       });
-  }*/ else {
+}*/ /* else {
     Destination.find({})
       .then((destinations) => {
         if (!destinations) {
@@ -112,7 +112,7 @@ app.get("/api/destinations", (req, res) => {
           error: err.message
         });
       });
-  }
+}*/
 });
 
 // Destinations - GET - get single by id
