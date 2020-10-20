@@ -30,7 +30,7 @@ app.use(function (req, res, next) {
 // 3. Database Connection --------------------------------
 mongoose
   .connect(
-    "mongodb://b82304bfb2041cbaaf1bbd792a033c29:sunbug62@12b.mongo.evennode.com:27018/b82304bfb2041cbaaf1bbd792a033c29",
+    "mongodb://b82304bfb2041cbaaf1bbd792a033c29:sunbug62@12a.mongo.evennode.com:27018/b82304bfb2041cbaaf1bbd792a033c29",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
