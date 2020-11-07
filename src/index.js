@@ -80,41 +80,7 @@ app.get("/api/destinations", (req, res) => {
           error: err.message
         });
       });
-  } /* else {
-    Destination.find({})
-      .then((destinations) => {
-        if (!destinations) {
-          res.status(400).send({ msg: "No destinations found" });
-        } else {
-          res.json(destinations);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).send({
-          msg: "Problem finding destinations",
-          error: err.message
-        });
-      });
-}*/
-
-  /*else if (req.query.brand) {
-    Car.find({ brand: req.query.brand })
-      .then((cars) => {
-        if (!cars) {
-          res.status(400).send({ msg: "No destinations found" });
-        } else {
-          res.json(cars);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).send({
-          msg: "Problem finding cars",
-          error: err.message
-        });
-      });
-}*/
+  }
 });
 
 // Destinations - GET - get single by id
@@ -192,27 +158,6 @@ app.get("/api/resorts/:id", (req, res) => {
         error: err.message
       });
     });
-});
-
-// Reviews - PUT - update a single car
-app.put("/api/cars/:id", (req, res) => {
-  // validate request
-  if (!req.body) {
-    return res.status(400).send("Problem booking car - bad request");
-  } else {
-    // update car
-    Destination.findByIdAndUpdate(req.params.id, req.body, { new: true })
-      .then((destination) => {
-        res.json(destination);
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).send({
-          msg: "Problem booking car",
-          error: err.message
-        });
-      });
-  }
 });
 
 // Users ------------------------------
@@ -299,7 +244,7 @@ app.put("/api/users/:id", (req, res) => {
   }
 });
 
-// Users - DELETE - delete a Book
+// Users - DELETE - delete a User
 app.delete("/api/users/:id", (req, res) => {
   User.findByIdAndRemove(req.params.id)
     .then((user) => {
@@ -313,7 +258,7 @@ app.delete("/api/users/:id", (req, res) => {
     });
 });
 
-// Reviews - GET - get all reviews with corresponding car id
+// Reviews - GET - get all reviews with corresponding location id
 app.get("/api/reviews", (req, res) => {
   console.log(req.query);
   Review.find(req.query)
